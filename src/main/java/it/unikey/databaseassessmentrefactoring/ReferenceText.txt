@@ -1,0 +1,131 @@
+-- Simone Giampà
+
+
+
+--Scrivere una query per trovare il department_name e numero di employee associati a quel department
+
+ SELECT D.department_name AS 'Department Name',Count(E.employee_id) AS 'Employee Count'
+ FROM Department AS D
+ JOIN Employee AS E
+ ON E.department_id = D.department_id
+ GROUP BY D.department_name
+
+--Scrivere una query per mostrare il salario medio degli employee di ogni department
+
+SELECT D.department_name AS 'Department Name',AVG(E.employee_salary) AS 'AVG SALARY'
+FROM Employee AS E
+JOIN Department AS D
+ON D.department_id = E.department_id
+GROUP BY D.department_name
+
+
+--Scrivere una query per mostrare job_title, employee name, differenza tra il salario di quell'employee e il salario minimo
+
+SELECT J.job_title AS 'Job Title' , E.employee_first_name AS 'Name', E.employee_salary - J.job_min_salary AS 'Difference'
+FROM Job AS J
+JOIN Employee AS E
+ON E.employee_job_id = J.job_id
+
+---------------------------------------------------------------------------------------------------------------------
+
+ CREATE TABLE Author (
+
+ author_name nvarchar(255) NOT NULL ,
+ author_id int,
+ author_surname nvarchar(255) NULL
+
+ CONSTRAINT PK_authorId PRIMARY KEY (author_id)
+
+ )
+
+
+CREATE TABLE Book (
+
+ book_id int,
+ book_title nvarchar(255) NOT NULL ,
+ author_id int NOT NULL
+
+ CONSTRAINT PK_bookId PRIMARY KEY (book_id)
+ CONSTRAINT FK_authorId FOREIGN KEY (author_id) REFERENCES Author(author_id)
+
+ )
+
+
+ CREATE TABLE Customer(
+
+ customer_id int,
+ customer_name nvarchar(255) NOT NULL ,
+ customer_surname nvarchar(255) NOT NULL
+
+ CONSTRAINT PK_customerId PRIMARY KEY (customer_id)
+
+ )
+
+ CREATE TABLE Borrow (
+
+ borrow_id int,
+ customer_id int NOT NULL ,
+ book_id int NOT NULL ,
+ borrow_start_date datetime NOT NULL ,
+ borrow_end_date datetime NULL,
+
+ CONSTRAINT PK_borrowId PRIMARY KEY (borrow_id),
+ CONSTRAINT FK_customerId FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
+ CONSTRAINT FK_bookId FOREIGN KEY (book_id) REFERENCES Book(book_id)
+
+
+ )
+--Selezionare tutti i libri prestati ad un customer
+
+SELECT C.customer_name AS 'Name',C.customer_surname AS 'Surname',BO.book_title AS Title
+FROM Customer AS C
+JOIN Borrow AS B
+ON B.customer_id = C.customer_id
+JOIN Book as BO
+ON BO.book_id = B.book_id
+
+
+
+--Selezionare il libro maggiormente prestato
+
+SELECT TOP 1 Count(BO.book_id),B.book_title
+FROM Book AS B
+JOIN Borrow AS BO
+ON B.book_id = BO.book_id
+GROUP BY book_title
+ORDER BY Count(BO.book_id) DESC
+
+
+--Selezionare individua prestiti la cui durata sia maggiore di 15 giorni
+
+SELECT BO.book_id AS 'Borrow ID'
+FROM Borrow AS BO
+WHERE DATEDIFF(day,BO.borrow_end_date,BO.borrow_start_date) > 15
+
+
+--Selezionare individua i prestiti non ancora terminati.
+
+SELECT BO.book_id AS 'Borrow ID'
+FROM Borrow AS BO
+WHERE BO.borrow_end_date = NULL
+
+
+--Selezionare storico dei prestiti di un customer indicando il periodo.
+
+SELECT C.customer_id AS 'Customer ID',BO.borrow_start_date AS 'Borrow Start' , BO.borrow_end_date AS 'Borrow End'
+FROM Borrow AS BO
+JOIN Customer AS C
+ON C.customer_id = Bo.customer_id
+WHERE C.customer_id = 1
+ORDER BY BO.borrow_start_date
+
+ -- Selezionare i 3 autori con più libri prestati
+
+ SELECT TOP 3 Count(BO.borrow_id) AS 'Book Borrowed',A.author_name,A.author_surname
+ FROM Author AS A
+ JOIN BOOK AS B
+ ON B.author_id = A.author_id
+ JOIN BORROW AS BO
+ ON BO.book_id = B.book_id
+ GROUP BY A.author_id
+ ORDER BY Count(BO.borrow_id) DESC
