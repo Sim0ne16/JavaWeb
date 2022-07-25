@@ -33,7 +33,7 @@ public class StudentEntity {
     private String surname;
 
 
-    @OneToMany(mappedBy = "Student")
+    @OneToMany(mappedBy = "student")
     Set<CourseRatingEntity> ratings;
 
 }

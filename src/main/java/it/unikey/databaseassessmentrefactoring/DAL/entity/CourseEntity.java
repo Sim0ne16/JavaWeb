@@ -1,11 +1,15 @@
 package it.unikey.databaseassessmentrefactoring.DAL.entity;
 
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity(name = "Course")
+@Getter
+@Setter
 public class CourseEntity {
 
     @Id
@@ -18,7 +22,7 @@ public class CourseEntity {
     @NonNull
     private Integer duration ;
 
-    @OneToMany(mappedBy = "Course")
+    @OneToMany(mappedBy = "course")
     Set<CourseRatingEntity> ratings;
 
 }

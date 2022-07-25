@@ -1,9 +1,14 @@
 package it.unikey.databaseassessmentrefactoring.DAL.entity;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity(name = "CourseRating")
+@Getter
+@Setter
 public class CourseRatingEntity {
 
     @EmbeddedId
