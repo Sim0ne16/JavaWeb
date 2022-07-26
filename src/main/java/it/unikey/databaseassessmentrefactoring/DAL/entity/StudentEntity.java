@@ -27,7 +27,6 @@ public class StudentEntity {
 
     @Column(nullable = false)
     @NonNull
-
     private String lastName;
 
     private String surname;

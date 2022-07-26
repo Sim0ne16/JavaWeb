@@ -14,7 +14,6 @@ public class CourseRatingDTO {
 
     StudentDTO student;
 
-
     CourseDTO course;
 
 }
