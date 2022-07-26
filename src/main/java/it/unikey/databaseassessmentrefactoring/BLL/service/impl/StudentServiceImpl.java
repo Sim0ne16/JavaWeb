@@ -62,4 +62,12 @@ public class StudentServiceImpl implements StudentService {
         repository.deleteById(id);
 
     }
+
+    @Override
+    public List<StudentDTO> getByNameAndLastName(String name, String lastName) throws NotFoundException {
+        if(!repository.existsByNameAndLastName(name,lastName))
+            throw new NotFoundException("not found");
+        List<StudentEntity> students = repository.findByNameAndLastName(name,lastName);
+        return mapper.fromEntityListToDtoList(students);
+    }
 }
