@@ -16,4 +16,6 @@ public class CourseRatingRest {
 
     CourseRest course;
 
+    Integer rating;
+
 }

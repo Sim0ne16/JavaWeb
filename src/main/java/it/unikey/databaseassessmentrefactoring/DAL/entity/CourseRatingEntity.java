@@ -24,6 +24,7 @@ public class CourseRatingEntity {
     @JoinColumn(name = "course_id")
     CourseEntity course;
 
+    private Integer rating;
 
 
 

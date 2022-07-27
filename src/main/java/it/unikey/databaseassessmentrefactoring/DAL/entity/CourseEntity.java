@@ -20,7 +20,7 @@ public class CourseEntity {
 
     @Column(nullable = false)
     @NonNull
-    private Integer duration ;
+    private Double duration ;
 
     @OneToMany(mappedBy = "course")
     Set<CourseRatingEntity> ratings;

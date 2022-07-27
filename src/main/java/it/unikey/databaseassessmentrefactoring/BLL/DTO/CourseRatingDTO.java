@@ -16,4 +16,6 @@ public class CourseRatingDTO {
 
     CourseDTO course;
 
+    Integer rating;
+
 }
