@@ -6,6 +6,7 @@ import it.unikey.databaseassessmentrefactoring.BLL.mapper.impl.StudentMapper;
 import it.unikey.databaseassessmentrefactoring.BLL.service.abstracts.StudentService;
 import it.unikey.databaseassessmentrefactoring.DAL.entity.StudentEntity;
 import it.unikey.databaseassessmentrefactoring.DAL.repository.StudentRepository;
+import it.unikey.databaseassessmentrefactoring.PL.rest.CourseRest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -55,13 +56,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void delete(Integer id) throws NotFoundException {
-        if(!repository.existsById(id)){
+    public void delete(StudentDTO dto) throws NotFoundException {
+        if(!repository.existsById(dto.getId())){
             throw new NotFoundException("not found");
         }
-        repository.deleteById(id);
+        repository.deleteById(dto.getId());
+
 
     }
+
+
 
     @Override
     public List<StudentDTO> getByNameAndLastName(String name, String lastName) throws NotFoundException {

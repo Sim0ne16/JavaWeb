@@ -8,5 +8,6 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<StudentEntity,Integer> {
     boolean existsByNameAndLastName(String name, String lastName);
 
+
     List<StudentEntity> findByNameAndLastName(String name, String lastName);
 }

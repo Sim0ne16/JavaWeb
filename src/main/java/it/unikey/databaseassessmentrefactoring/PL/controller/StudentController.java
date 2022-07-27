@@ -114,10 +114,10 @@ public class StudentController {
 
     //Con il verbo Delete indichiamo l'eliminazione di un'entità nel database
     @DeleteMapping(path = "/{id}")
-    private ResponseEntity<StudentRest> deleteStudent(@PathVariable Integer id){
+    private ResponseEntity<StudentRest> deleteStudent(@PathVariable StudentRest id){
 
         try {
-            service.delete(id);
+            service.delete(mapper.fromRestToDto(id));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NotFoundException e) {
             e.printStackTrace();

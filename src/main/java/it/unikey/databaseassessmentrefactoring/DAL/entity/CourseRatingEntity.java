@@ -1,6 +1,7 @@
 package it.unikey.databaseassessmentrefactoring.DAL.entity;
 
 
+import it.unikey.databaseassessmentrefactoring.BLL.DTO.CourseRatingDTO;
 import lombok.Getter;
 import lombok.Setter;
 

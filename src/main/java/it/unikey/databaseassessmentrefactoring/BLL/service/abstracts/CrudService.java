@@ -1,6 +1,7 @@
 package it.unikey.databaseassessmentrefactoring.BLL.service.abstracts;
 
 import it.unikey.databaseassessmentrefactoring.BLL.exception.NotFoundException;
+import it.unikey.databaseassessmentrefactoring.PL.rest.CourseRest;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public interface CrudService<T> {
 
     //Posso passare anche un oggetto intero,approcci diversi
 
-    void delete(Integer id) throws NotFoundException;
+    void delete(T dto) throws NotFoundException;
+
 
 }

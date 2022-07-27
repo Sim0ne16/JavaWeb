@@ -6,5 +6,5 @@ import it.unikey.databaseassessmentrefactoring.PL.rest.CourseRatingRest;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface CourseRatingRestMapping extends GenericRestMapper<CourseRatingDTO, CourseRatingRest> {
+public interface CourseRatingRestMapper extends GenericRestMapper<CourseRatingDTO, CourseRatingRest> {
 }
