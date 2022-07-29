@@ -1,6 +1,11 @@
 package it.unikey.databaseassessmentrefactoring.PL.controller;
 
 
+//per visualizzare l'ui di swagger http://localhost:8080/swagger-ui.html
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import it.unikey.databaseassessmentrefactoring.BLL.DTO.StudentDTO;
 import it.unikey.databaseassessmentrefactoring.BLL.exception.NotFoundException;
 import it.unikey.databaseassessmentrefactoring.BLL.service.abstracts.StudentService;
@@ -34,6 +39,11 @@ public class StudentController {
     //Andando a specificare un path con le {} indichiamo la presenza di un pathvariable, che possiamo passare poi come
     //parametro nel metodo --> in questo caso {id}
     @GetMapping(path = "/{id}")
+    @Operation(summary = "Get a student by id") //specifico cosa sto facendo
+    @ApiResponses({ //Descrivere status code e descrizione
+            @ApiResponse(responseCode = "200",description = "Got student by id"),
+            @ApiResponse(responseCode = "400",description = "Student not found")
+    })
     private ResponseEntity<StudentRest> getStudentById(@PathVariable Integer id) {
 
         try {
