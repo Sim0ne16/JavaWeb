@@ -1,10 +1,12 @@
 package it.unikey.databaseassessmentrefactoring.PL.controller;
 
 import it.unikey.databaseassessmentrefactoring.BLL.DTO.CourseDTO;
+import it.unikey.databaseassessmentrefactoring.BLL.DTO.StudentDTO;
 import it.unikey.databaseassessmentrefactoring.BLL.exception.NotFoundException;
 import it.unikey.databaseassessmentrefactoring.BLL.service.abstracts.CourseService;
 import it.unikey.databaseassessmentrefactoring.PL.mapper.impl.CourseRestMapper;
 import it.unikey.databaseassessmentrefactoring.PL.rest.CourseRest;
+import it.unikey.databaseassessmentrefactoring.PL.rest.StudentRest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,6 +68,16 @@ public class CourseController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+
+    @PostMapping
+    private ResponseEntity<CourseRest> postCourse (@RequestBody CourseRest course){
+
+        CourseDTO dto = service.insert(mapper.fromRestToDto(course));
+        CourseRest rest = mapper.fromDtoToRest(dto);
+        return new ResponseEntity<>(rest,HttpStatus.OK);
+
     }
 
 
