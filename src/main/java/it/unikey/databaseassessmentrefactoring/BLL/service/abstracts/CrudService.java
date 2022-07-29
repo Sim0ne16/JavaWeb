@@ -1,7 +1,6 @@
 package it.unikey.databaseassessmentrefactoring.BLL.service.abstracts;
 
 import it.unikey.databaseassessmentrefactoring.BLL.exception.NotFoundException;
-import it.unikey.databaseassessmentrefactoring.PL.rest.CourseRest;
 
 import java.util.List;
 

@@ -69,6 +69,14 @@ public class CourseController {
     }
 
 
+    @PostMapping
+    private ResponseEntity<CourseRest> postAthlete(@RequestBody CourseRest course){
+       CourseDTO athleteDto = service.insert(mapper.fromRestToDto(course));
+       CourseRest Rest = mapper.fromDtoToRest(athleteDto);
+        return new ResponseEntity<>(Rest, HttpStatus.CREATED);
+    }
+
+
     //update
     @PutMapping
     private ResponseEntity<CourseRest> putCourse (@RequestBody CourseRest course){
